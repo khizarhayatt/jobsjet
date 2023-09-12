@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserRegisteredEvent;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
@@ -28,6 +29,8 @@ class RegisterController extends Controller
         // dd($info);
         $user = User::create($info);
         if ($user and $user->id > 0) {
+            UserRegisteredEvent::dispatch($user);
+
             return redirect(route('admin.login'))->with('message', 'Succesfully Registered!');
         } else {
             return redirect()->back()->with('error', 'Error occured!');
