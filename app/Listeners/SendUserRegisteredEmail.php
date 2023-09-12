@@ -23,12 +23,12 @@ class SendUserRegisteredEmail
      */
     public function handle(UserRegisteredEvent $event): void
     {
-        dd($event);
+
         $info = array(
-            'email' => $event->email,
-            'first_name' => $event->first_name,
-            'last_name' => $event->last_name,
+            'email' => $event->user->email,
+            'first_name' => $event->user->first_name,
+            'last_name' => $event->user->last_name,
         );
-        Mail::to($event->email)->send(new AccountInfoEmail($info));
+        Mail::to($event->user->email)->send(new AccountInfoEmail($info));
     }
 }

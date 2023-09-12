@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 
 
 //admin routes
-Route::middleware(['guest', 'throttle:60,1'])->group(function () {
-    Route::get('/', [LoginController::class, 'login'])->name('admin');
+Route::middleware(['guest'])->group(function () {
+    // Route::middleware(['guest', 'throttle:60,1'])->group(function () {
 
     Route::get('/login', [LoginController::class, 'login'])->name('admin.login');
     Route::post('/login', [LoginController::class, 'verify'])->name('admin.verify');

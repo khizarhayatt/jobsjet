@@ -34,7 +34,14 @@ class AccountInfoEmail extends Mailable
     /**
      * Get the message content definition.
      */
+    public function content(): Content
+    {
+        $data['user'] = $this->data;
+        return new Content(
+            view: 'emails.registeration',
 
+        );
+    }
 
     /**
      * Get the attachments for the message.
