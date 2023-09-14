@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,11 +23,21 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/register', [RegisterController::class, 'register'])->name('admin.register');
     Route::post('/register', [RegisterController::class, 'create'])->name('admin.create');
 
-    Route::get('/reset', [RegisterController::class, 'reset'])->name('admin.resetview');
-    Route::post('/reset', [RegisterController::class, 'reset'])->name('admin.reset');
+    // Forgot Password Routes
+    Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('admin.password.request');
+    Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('admin.password.email');
+
+    // Password Reset Routes
+    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('admin.password.reset');
+    Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('admin.password.update');
 });
+
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
 });
+
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
