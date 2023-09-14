@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-Route::get('/login2', [LoginController::class, 'login'])->name('admin.login');
 Route::get('/', [LoginController::class, 'login'])->name('admin.login');
 //admin routes
 Route::middleware(['guest'])->group(function () {
