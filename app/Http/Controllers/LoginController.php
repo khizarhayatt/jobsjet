@@ -15,7 +15,7 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function verify(LoginRequest $request)
+    public function verification(LoginRequest $request)
     {
         $email = $request->input('email');
         $password = $request->input('password');

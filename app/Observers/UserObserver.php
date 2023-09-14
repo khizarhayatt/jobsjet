@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\User;
+use App\Models\Log;
 
 class UserObserver
 {
@@ -11,7 +12,7 @@ class UserObserver
      */
     public function created(User $user): void
     {
-        $user->logs()->create([
+        $user->log()->create([
             'action' => 'account-created',
             'data'=>$user,
     ]);

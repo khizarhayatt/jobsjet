@@ -11,14 +11,16 @@ use Illuminate\Support\Facades\Route;
 | Routes
 |--------------------------------------------------------------------------
 */
-
+Auth::routes();
 Route::get('/', [LoginController::class, 'login'])->name('admin.login');
+
 //admin routes
 Route::middleware(['guest'])->group(function () {
     // Route::middleware(['guest', 'throttle:60,1'])->group(function () {
 
     Route::get('/login', [LoginController::class, 'login'])->name('admin.login');
-    Route::post('/login', [LoginController::class, 'verify'])->name('admin.verify');
+    Route::post('/login', [LoginController::class, 'verification'])->name('auth.verification');
+
 
     Route::get('/register', [RegisterController::class, 'register'])->name('admin.register');
     Route::post('/register', [RegisterController::class, 'create'])->name('admin.create');
@@ -39,5 +41,5 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
 });
 
-Auth::routes();
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
