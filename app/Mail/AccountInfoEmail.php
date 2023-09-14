@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
@@ -13,6 +14,8 @@ class AccountInfoEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $data; // Define a public property to hold your data
+
     /**
      * Create a new message instance.
      */
@@ -22,25 +25,13 @@ class AccountInfoEmail extends Mailable
     }
 
     /**
-     * Get the message envelope.
+     * Build the message.
      */
-    public function envelope(): Envelope
+    public function build()
     {
-        return new Envelope(
-            subject: 'Account Info Email',
-        );
-    }
-
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
-        $data['user'] = $this->data;
-        return new Content(
-            view: 'emails.registeration',
-
-        );
+        return $this->view('emails.registeration')
+                    ->subject('Account Info Email')
+                    ->with(['user' => $this->data]); // Pass data to the view using the 'with' method
     }
 
     /**

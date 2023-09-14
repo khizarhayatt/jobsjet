@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-
+Route::get('/', [LoginController::class, 'login'])->name('admin.login');
 //admin routes
 Route::middleware(['guest'])->group(function () {
     // Route::middleware(['guest', 'throttle:60,1'])->group(function () {

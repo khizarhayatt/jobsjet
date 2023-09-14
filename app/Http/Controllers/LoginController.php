@@ -12,7 +12,7 @@ class LoginController extends Controller
 {
     public function login()
     {
-        return redirect(route('admin.login'));
+        return view('auth.login');
     }
 
     public function verify(LoginRequest $request)

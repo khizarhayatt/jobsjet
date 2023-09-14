@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 
-class SendUserRegisteredEmail
+class SendUserRegisteredEmail implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -24,11 +24,11 @@ class SendUserRegisteredEmail
     public function handle(UserRegisteredEvent $event): void
     {
 
-        $info = array(
+        $data = array(
             'email' => $event->user->email,
             'first_name' => $event->user->first_name,
             'last_name' => $event->user->last_name,
         );
-        Mail::to($event->user->email)->send(new AccountInfoEmail($info));
+        Mail::to($event->user->email)->send(new AccountInfoEmail($data));
     }
 }

@@ -8,6 +8,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return redirect(route('admin.dashboard'))->with('message', 'Login Successfully!');
+        return view('home')->with('message', 'Login Successfully!');
     }
 }
