@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 | Routes
 |--------------------------------------------------------------------------
 */
-
+Route::get('/logninnn', [LoginController::class, 'login'])->name('admin.login');
 Route::get('/', [LoginController::class, 'login'])->name('admin.login');
 //admin routes
 Route::middleware(['guest'])->group(function () {
