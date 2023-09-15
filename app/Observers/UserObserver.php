@@ -12,7 +12,7 @@ class UserObserver
      */
     public function created(User $user): void
     {
-        $user->log()->create([
+        $user->logs()->create([
             'action' => 'account-created',
             'data'=>$user,
     ]);
