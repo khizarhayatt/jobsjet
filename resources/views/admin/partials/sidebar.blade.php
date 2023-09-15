@@ -19,11 +19,19 @@
 
             <li class="dropdown">
                 <a href="#" class="menu-toggle nav-link has-dropdown">
-                    <i class="fas fa-thumbs-up"></i>
-                    <span>Advanced</span>
+                    <i class="fa-solid fa-user"></i><span>User Management</span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="avatar.html">Avatar</a></li>
+                    <li><a class="nav-link" href="#">Avatar</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="menu-toggle nav-link has-dropdown">
+                    <i class="fa-solid fa-briefcase"></i><span>Job Management</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="#">Avatar</a></li>
                 </ul>
             </li>
             <li>
