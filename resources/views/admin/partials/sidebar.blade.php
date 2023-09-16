@@ -19,7 +19,19 @@
 
             <li class="dropdown">
                 <a href="#" class="menu-toggle nav-link has-dropdown">
-                    <i class="fa-solid fa-user"></i><span>User Management</span>
+                    <i class="fa-solid fa-user"></i><span>Users </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="#">Users List</a></li>
+                    <li><a class="nav-link" href="#">Create User</a></li>
+                    <li><a class="nav-link" href="#">Roles & Permissions</a></li>
+                    <li><a class="nav-link" href="#">Activity & History</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="menu-toggle nav-link has-dropdown">
+                    <i class="fa-solid fa-briefcase"></i><span>Jobs </span>
                 </a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="#">Avatar</a></li>
@@ -28,18 +40,26 @@
 
             <li class="dropdown">
                 <a href="#" class="menu-toggle nav-link has-dropdown">
-                    <i class="fa-solid fa-briefcase"></i><span>Job Management</span>
+                    <i class="fas fa-credit-card"></i><span>Payments</span>
                 </a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="#">Avatar</a></li>
                 </ul>
             </li>
+
             <li>
-                <a class="nav-link" href="blank.html">
-                    <i class="fas fa-thumbs-up"></i>
-                    <span>Blank Page</span>
+                <a class="nav-link" href="#">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Reports & Analytics</span>
                 </a>
             </li>
+            <li>
+                <a class="nav-link" href="#">
+                    <i class="fas fa-envelope"></i>
+                    <span>Email Notifications</span>
+                </a>
+            </li>
+
         </ul>
     </aside>
 </div>

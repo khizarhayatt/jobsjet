@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -38,7 +41,15 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/users', [HomeController::class, 'userlist'])->name('admin.users.list');
     Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
+
+    // Roles
+    Route::resource('roles', RoleController::class);
+
+    // Permissions
+    Route::resource('permissions', PermissionController::class);
+
 });
 
 
