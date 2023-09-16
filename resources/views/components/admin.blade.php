@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>{{ ' | ' . config('app.name') }}</title>
+    <script src="{{ asset('js/datatables.min.js') }}"></script>
     <script src="{{ asset('js/app.min.js') }}"></script>
     @vite(['resources/js/app.js'])
     <link rel='shortcut icon' type='image/x-icon' href='assets/img/favicon.ico' />
