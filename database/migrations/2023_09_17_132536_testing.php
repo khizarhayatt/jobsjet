@@ -11,9 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('{{ table }}', function (Blueprint $table) {
-            // $table->tinyInteger('status')->default(0);
-        });
+        //
     }
 
     /**
@@ -21,8 +19,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('{{ table }}', function (Blueprint $table) {
-            //
-        });
+        //
     }
 };

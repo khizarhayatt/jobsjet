@@ -3,7 +3,10 @@
     <section class="section">
         <div class="section-body">
             <div class="row">
-                <div class="col-4 col-md-4 col-lg-4"> 
+                <div class="col-4 col-md-4 col-lg-4">
+                     
+                     
+                    
                     <div class="card">
                       <div class="card-header">
                         <h4>Create Role:</h4>
@@ -74,7 +77,8 @@
                 <div class="col-8 col-md-8 col-lg-8">
                     <div class="card">
                         <div class="card-header justify-content-between">
-                            <h4>Full Width</h4> 
+                            <h4>Full Width</h4> <a href="#" class="btn btn-icon icon-left btn-primary"><i
+                                    class="far fa-plus"></i> Create</a>
                         </div>
                         <div class="card-body p-0">
                             <div class="table-responsive">
@@ -142,30 +146,37 @@
                         <h4>Create Permission</h4>
                       </div>
                       <div class="card-body">
-                        <form   id="createPermissionForm" >
-                            @csrf  
+                        <form action="" method="post">
+
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                   <label for="inputEmail4">Permission Title</label>
-                                  <input type="Title" class="form-control" id="title" name="name" placeholder="Enter Permission Title">
+                                  <input type="Title" class="form-control" id="inputTitle4" placeholder="Enter Permission Title">
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <input type="submit" class="btn btn-primary" value="Submit">
+                                    <button class="btn btn-primary">Submit</button>
                                 </div>
                                  
                               </div>
-                        </form> 
-                      </div> 
-                    </div> 
+                        </form>
+                       
+                         
+                         
+                      </div>
+                       
+                    </div>
+                     
+                     
                   </div>
                 <div class="col-8 col-md-8 col-lg-8">
                     <div class="card">
                         <div class="card-header justify-content-between">
-                            <h4>Full Width</h4>  
+                            <h4>Full Width</h4> <a href="#" class="btn btn-icon icon-left btn-primary"><i
+                                    class="far fa-plus"></i> Create</a>
                         </div>
                         <div class="card-body p-0">
                             <div class="table-responsive">
-                                <table    id="permissionsTable" class="table table-striped table-md">
+                                <table class="table table-striped table-md">
                                     <tbody>
                                         <tr>
                                             <th>#</th>
@@ -174,7 +185,23 @@
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
-                                         
+                                        <tr>
+                                            <td>5</td>
+                                            <td>Isnap Kiswandi</td>
+                                            <td>2017-01-17</td>
+                                            <td>
+                                                <div class="badge badge-success">Active</div>
+                                            </td>
+                                            <td>
+                                                <div class="buttons">
+                                                    <a href="#" class="btn  btn-sm btn-icon btn-primary"><i
+                                                            class="far fa-edit"></i></a> 
+
+                                                    <a href="#" class="btn  btn-sm btn-icon btn-danger"><i
+                                                            class="fas fa-trash"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -204,7 +231,4 @@
 
         </div>
     </section>
-
-@include('errors.alerts')
-@include('admin.permissions.ajax')
 @endsection
