@@ -12,12 +12,8 @@ class PermissionController extends Controller
      */
     public function index(Request $request)
     {
-        $permissions = Permission::all(); // Replace with your data retrieval logic
-        if ($request->ajax()) {
-            return response()->json($permissions);
-        } else {
-            return view('admin.permissions.list')->with('permissions', $permissions);
-        }
+        $permissions = Permission::orderBy('id', 'ASC')->paginate(7);
+        return view('admin.permissions.list')->with('permissions', $permissions);
     }
 
     /**
@@ -38,8 +34,8 @@ class PermissionController extends Controller
         ]);
 
         // Create the permission
-        $permission = Permission::create($request->all());
-        return response()->json(['message' => 'Permission created successfully', 'permission' => $permission]);
+        $permissions = Permission::orderBy('id', 'ASC')->paginate(7);
+        return view('admin.permissions.list')->with('permissions', $permissions);
     }
 
     /**
