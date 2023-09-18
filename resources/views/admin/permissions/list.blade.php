@@ -53,11 +53,13 @@
 
                                                 <td>
                                                     <div class="buttons">
-                                                        <a href="#" class="btn btn-sm btn-icon btn-primary"><i
+
+                                                        <a href="{{ route('permissions.update', ['permission' => $item->id]) }}"
+                                                            class="btn btn-sm btn-icon btn-primary"><i
                                                                 class="far fa-edit"></i></a>
-                                                        <a href=""
-                                                            class="deletePermission btn btn-icon btn-sm btn-danger"><i
-                                                                class="fas fa-trash"></i></a>
+                                                        <a href="#"
+                                                            class=" deletePermission btn btn-icon btn-sm btn-danger"><i
+                                                                class="far fa-trash"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>

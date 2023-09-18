@@ -49,9 +49,8 @@ class PermissionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Permission $request)
     {
-        //
     }
 
     /**
@@ -59,7 +58,19 @@ class PermissionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        dd('$id');
+        // Validate input
+        $request->validate([
+            'name' => 'required|unique:permissions,name',
+        ]);
+
+        $permission = Permission::find(3);
+        $permission->title = "Updated title";
+        $permission->save();
+
+        // Create the permission
+        $permissions = Permission::orderBy('id', 'ASC')->paginate(7);
+        return view('admin.permissions.list')->with('permissions', $permissions);
     }
 
     /**
