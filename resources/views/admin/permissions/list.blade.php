@@ -54,12 +54,18 @@
                                                 <td>
                                                     <div class="buttons">
 
-                                                        <a href="{{ route('permissions.update', ['permission' => $item->id]) }}"
+                                                        <a href="{{ route('permissions.update', $item->id) }}"
                                                             class="btn btn-sm btn-icon btn-primary"><i
                                                                 class="far fa-edit"></i></a>
-                                                        <a href="#"
-                                                            class=" deletePermission btn btn-icon btn-sm btn-danger"><i
-                                                                class="far fa-trash"></i></a>
+
+                                                        <form method="post" class="d-inline-block"
+                                                            action="{{ route('permissions.destroy', $item->id) }}">
+                                                            @method('delete')
+                                                            @csrf
+                                                            <button type="submit"
+                                                                class="deletePermission d-inline-block btn btn-icon btn-sm btn-danger">
+                                                                <i class="far fa-trash"></i></button>
+                                                        </form>
                                                     </div>
                                                 </td>
                                             </tr>
