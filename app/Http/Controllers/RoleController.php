@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
@@ -11,7 +13,12 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return view('admin.roles.list');
+        try {
+            $data['permissions'] = Permission::all();
+            return view('admin.roles.list', $data);
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**

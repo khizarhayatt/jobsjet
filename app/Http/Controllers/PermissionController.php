@@ -13,12 +13,14 @@ class PermissionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request )
+    public function index(Request $request)
     {
-
-        $data['permissions'] = Permission::orderBy('id', 'ASC')->paginate(7);
-        return view('admin.permissions.list',$data);
-
+        try {
+            $data['permissions'] = Permission::orderBy('id', 'ASC')->paginate(7);
+            return view('admin.permissions.list', $data);
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -45,11 +47,11 @@ class PermissionController extends Controller
         }
         try {
             $permission = Permission::create([
-            'name' => $request->name,
-        ]);
-        // Create the permission
-          $permissions = Permission::orderBy('id', 'ASC')->paginate(7);
-          return view('admin.permissions.list')->with('permissions', $permissions);
+                'name' => $request->name,
+            ]);
+            // Create the permission
+            $permissions = Permission::orderBy('id', 'ASC')->paginate(7);
+            return view('admin.permissions.list')->with('permissions', $permissions);
         } catch (\Throwable $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -66,18 +68,18 @@ class PermissionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request,Permission $permission)
+    public function edit(Request $request, Permission $permission)
     {
-            try {
+        try {
 
-                $data['permissions'] = Permission::where('id', $request->id)->first();
-                if (!empty($data['permissions'])) {
-                    return view('admin.permissions.edit', $data);
-                }
-                return redirect()->route("permissions.index")->with('error', 'Permission not found!');
-            } catch (\Throwable $e) {
-                return redirect()->back()->with('error', $e->getMessage());
+            $data['permissions'] = Permission::where('id', $request->id)->first();
+            if (!empty($data['permissions'])) {
+                return view('admin.permissions.edit', $data);
             }
+            return redirect()->route("permissions.index")->with('error', 'Permission not found!');
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -89,12 +91,10 @@ class PermissionController extends Controller
         $single_permission = Permission::where('id', $request->id)->first();
 
         if (!empty($single_permission)) {
-
             $rules = [
                 'name' => 'required',
             ];
             $validator = Validator::make($request->all(), $rules);
-
 
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
@@ -124,11 +124,14 @@ class PermissionController extends Controller
         if (!$permission) {
             return redirect()->route('permissions.index')->with('error', 'Permission not found');
         }
-
         // Delete the permission
-        $permission->delete();
 
-        // Redirect back to the list with a success message
-        return redirect()->route('permissions.index')->with('success', 'Permission deleted successfully');
+        try {
+
+            $permission->delete();
+            return redirect()->route('permissions.index')->with('success', 'Permission deleted successfully');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 }
