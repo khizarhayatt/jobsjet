@@ -24,7 +24,8 @@
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="#">Users List</a></li>
                     <li><a class="nav-link" href="#">Create User</a></li>
-                    <li><a class="nav-link" href="#">Roles & Permissions</a></li>
+                    <li><a class="nav-link" href=""> Roles</a></li>
+                    <li><a class="nav-link" href="{{ route('permissions.index') }}"> Permissions</a></li>
                     <li><a class="nav-link" href="#">Activity & History</a></li>
                 </ul>
             </li>

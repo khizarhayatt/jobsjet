@@ -48,7 +48,21 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('roles', RoleController::class);
 
     // Permissions
-    Route::resource('permissions', PermissionController::class);
+     // Show a listing of permissions
+    Route::get('permissions', [PermissionController::class,'index'])->name('permissions.index');
+
+    // Store a newly created permission in storage
+    Route::post('permissions', [PermissionController::class,'store'])->name('permissions.store');
+
+    // Show the form for editing the specified permission
+    Route::get('permissions/{id}/edit', [PermissionController::class,'edit'])->name('permissions.edit');
+
+    // Update the specified permission in storage
+    Route::put('permissions/{id}', [PermissionController::class,'update'])->name('permissions.update');
+
+    // Remove the specified permission from storage
+    Route::delete('permissions/{id}', [PermissionController::class,'destroy'])->name('permissions.destroy');
+
 
 });
 

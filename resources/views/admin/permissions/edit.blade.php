@@ -9,21 +9,22 @@
                     @include('errors.alerts')
                     <div class="card">
                         <div class="card-header">
-                            <h4>Edit Permission</h4>
+                            <h4>Update Permission</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('permissions.update', $permissions->id) }}" method="POST">
+
+                            <form action="{{ route('permissions.update', $permissions->id) }}" method="POST">
                                 @csrf
+                                @method('PUT')
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <label for="inputEmail4">Permission Title</label>
-                                        <input type="Title" value="{{ $permissions->name }}" class="form-control"
-                                            id="title" name="name" placeholder="Enter Permission Title">
+                                        <label for="title">Permission Update</label>
+                                        <input type="text" class="form-control" id="title" name="name"
+                                            placeholder="Enter Permission Title" value="{{ $permissions->name }}">
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <input type="submit" class="btn btn-primary" value="Submit">
+                                        <input type="submit" class="btn btn-primary" value="Update">
                                     </div>
-
                                 </div>
                             </form>
                         </div>
@@ -36,7 +37,4 @@
 
         </div>
     </section>
-
-
-    {{-- @include('admin.permissions.ajax') --}}
 @endsection

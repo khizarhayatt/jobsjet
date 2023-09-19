@@ -12,20 +12,31 @@
                             <h4>Create Permission</h4>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('permissions.store') }}" method="POST">
+
+                            <form
+                                action="{{ isset($permission) ? route('permissions.update', $permission->id) : route('permissions.store') }}"
+                                method="POST">
                                 @csrf
+                                @if (isset($permission))
+                                    @method('PUT') <!-- For edit mode -->
+                                @endif
+
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <label for="inputEmail4">Permission Title</label>
-                                        <input type="Title" class="form-control" id="title" name="name"
-                                            placeholder="Enter Permission Title">
+                                        <label for="title">Permission Title</label>
+                                        <input type="text" class="form-control" id="title" name="name"
+                                            placeholder="Enter Permission Title"
+                                            value="{{ isset($permission) ? $permission->name : '' }}">
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <input type="submit" class="btn btn-primary" value="Submit">
+                                        <input type="submit" class="btn btn-primary"
+                                            value="{{ isset($permission) ? 'Update' : 'Submit' }}">
                                     </div>
-
                                 </div>
                             </form>
+
+
+
                         </div>
                     </div>
                 </div>
@@ -49,12 +60,12 @@
 
                                                 <td> {{ $key + 1 }} </td>
                                                 <td> {{ $item->name }} </td>
-                                                <td> {{ $item->created_at }} </td>
+                                                <td> {{ $item->created_at->format('F j, Y') }} </td>
 
                                                 <td>
                                                     <div class="buttons">
 
-                                                        <a href="{{ route('permissions.update', $item->id) }}"
+                                                        <a href="{{ route('permissions.edit', $item->id) }}"
                                                             class="btn btn-sm btn-icon btn-primary"><i
                                                                 class="far fa-edit"></i></a>
 
@@ -89,7 +100,4 @@
 
         </div>
     </section>
-
-
-    {{-- @include('admin.permissions.ajax') --}}
 @endsection

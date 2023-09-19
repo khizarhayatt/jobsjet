@@ -13,10 +13,12 @@ class PermissionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request )
     {
-        $permissions = Permission::orderBy('id', 'ASC')->paginate(7);
-        return view('admin.permissions.list')->with('permissions', $permissions);
+
+        $data['permissions'] = Permission::orderBy('id', 'ASC')->paginate(7);
+        return view('admin.permissions.list',$data);
+
     }
 
     /**
@@ -31,14 +33,26 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate input
-        $request->validate([
-            'name' => 'required|unique:permissions,name',
-        ]);
 
+        $rules = [
+            'name' => 'required',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        try {
+            $permission = Permission::create([
+            'name' => $request->name,
+        ]);
         // Create the permission
-        $permissions = Permission::orderBy('id', 'ASC')->paginate(7);
-        return view('admin.permissions.list')->with('permissions', $permissions);
+          $permissions = Permission::orderBy('id', 'ASC')->paginate(7);
+          return view('admin.permissions.list')->with('permissions', $permissions);
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -52,16 +66,18 @@ class PermissionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Permission $permission)
+    public function edit(Request $request,Permission $permission)
     {
-        // $this->authorize('PermissionsEdit');
-        $data['title']  = "Permission Edit";
-        $data['permissions'] = Permission::where('id', $permission->id)->first();
+            try {
 
-        if (!empty($data['permissions'])) {
-            return view('admin.permissions.edit', $data);
-        }
-        return redirect()->route("permissions.index")->with('error', 'permissions not found!');
+                $data['permissions'] = Permission::where('id', $request->id)->first();
+                if (!empty($data['permissions'])) {
+                    return view('admin.permissions.edit', $data);
+                }
+                return redirect()->route("permissions.index")->with('error', 'Permission not found!');
+            } catch (\Throwable $e) {
+                return redirect()->back()->with('error', $e->getMessage());
+            }
     }
 
     /**
@@ -69,7 +85,8 @@ class PermissionController extends Controller
      */
     public function update(Request $request, Permission $permission)
     {
-        $single_permission = Permission::where('id', $permission->id)->first();
+
+        $single_permission = Permission::where('id', $request->id)->first();
 
         if (!empty($single_permission)) {
 
@@ -77,13 +94,14 @@ class PermissionController extends Controller
                 'name' => 'required',
             ];
             $validator = Validator::make($request->all(), $rules);
+
+
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
             }
             try {
                 $update =  $single_permission->update([
                     'name' => $request->name,
-
                 ]);
 
                 if ($update > 0) {
