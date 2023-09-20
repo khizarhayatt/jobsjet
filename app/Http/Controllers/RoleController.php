@@ -85,7 +85,36 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $rules = [
+            'name' => 'required',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        try {
+            // Find the role by its ID
+            $role = Role::find($id);
+
+            if (!$role) {
+                return redirect()->back()->with('error', 'Role not found.');
+            }
+
+            // Update the role's name
+            $role->name = $request->name;
+            $role->save();
+
+            // Sync permissions if needed
+            if (isset($request->permissions)) {
+                $role->syncPermissions($request->permissions);
+            }
+
+            return redirect()->route('roles.index')->with('success', 'Role updated successfully');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
