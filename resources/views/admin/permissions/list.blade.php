@@ -60,8 +60,9 @@
                                             <tr>
 
                                                 <td> {{ $key + 1 }} </td>
-                                                <td> {{ $item->name }} </td>
-                                                <td> {{ $item->created_at->format('F j, Y') }} </td>
+                                                <td> {{ isset($item->name) ? $item->name : '-' }} </td>
+                                                <td> {{ isset($item->created_at) ? $item->created_at->format('F j, Y') : '-' }}
+                                                </td>
 
                                                 <td>
                                                     <div class="buttons">

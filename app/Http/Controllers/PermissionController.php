@@ -50,8 +50,7 @@ class PermissionController extends Controller
                 'name' => $request->name,
             ]);
             // Create the permission
-            $permissions = Permission::orderBy('id', 'ASC')->paginate(7);
-            return view('admin.permissions.list')->with('permissions', $permissions);
+            return redirect()->route('permissions.index')->with('success', 'Permission created successfully');
         } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -76,7 +75,7 @@ class PermissionController extends Controller
             if (!empty($data['permissions'])) {
                 return view('admin.permissions.edit', $data);
             }
-            return redirect()->route("permissions.index")->with('error', 'Permission not found!');
+            return redirect()->route("permissions.index")->with('error', 'Permission  not found!');
         } catch (\Throwable $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -129,7 +128,7 @@ class PermissionController extends Controller
         try {
 
             $permission->delete();
-            return redirect()->route('permissions.index')->with('success', 'Permission deleted successfully');
+            return redirect()->route('permissions.index')->with('success', 'Permission  deleted successfully');
         } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

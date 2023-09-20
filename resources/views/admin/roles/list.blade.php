@@ -67,26 +67,25 @@
                                             <th>Title</th>
                                             <th>Permissios</th>
                                             <th>Created At</th>
-
                                             <th>Action</th>
                                         </tr>
                                         @foreach ($roles as $key => $item)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
-                                                <td>{{ $item->name }}</td>
-                                                <td>
-                                                    <ul class="d-block">
-                                                        <li class="d-inline-block">Test</li>
-                                                        <li class="d-inline-block">TestTest</li>
-                                                        <li class="d-inline-block">TestTest</li>
-                                                        <li class="d-inline-block">Test</li>
-                                                        <li class="d-inline-block">TestTest</li>
-                                                        <li class="d-inline-block">Test</li>
-                                                    </ul>
+                                                <td class="w-25">{{ $item->name }}</td>
+                                                <td style="width:40%">
+                                                    <span class="badge badge-info my-1">Total
+                                                        ({{ count($item->permissions) }})
+                                                    </span>
+                                                    @foreach ($item->permissions as $permission)
+                                                        <span class="badge badge-light my-1">{{ $permission->name }}
+                                                        </span>
+                                                    @endforeach
+
                                                 </td>
                                                 <td> {{ $item->created_at->format('F j, Y') }} </td>
 
-                                                <td>
+                                                <td class="">
                                                     <div class="buttons">
 
                                                         <a href="{{ route('roles.edit', $item->id) }}"

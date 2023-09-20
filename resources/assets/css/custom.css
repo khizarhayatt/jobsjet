@@ -1,4 +1,27 @@
-
 /*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY3VzdG9tLmNzcyIsInNvdXJjZXMiOlsiY3VzdG9tLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiJ9 */
 
 /*# sourceMappingURL=custom.css.map */
+.w-5 {
+    width: 5% !important;
+}
+.w-10 {
+    max-width: 10% !important;
+}
+.w-15 {
+    max-width: 15% !important;
+}
+.w-20 {
+    max-width: 20% !important;
+}
+.w-7 {
+    max-width: 7% !important;
+}
+.w-13 {
+    max-width: 13% !important;
+}
+.w-17 {
+    max-width: 17% !important;
+}
+.w-20 {
+    max-width: 25% !important;
+}

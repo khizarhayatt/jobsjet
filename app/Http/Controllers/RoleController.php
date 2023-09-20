@@ -51,12 +51,11 @@ class RoleController extends Controller
             $role = Role::create([
                 'name' => $request->name,
             ]);
+            $role->syncPermissions($request->permissions);
+
             // Create the permission
             if (isset($role->id)) {
-                $data['roles'] = Role::orderBy('id', 'ASC')->paginate(7);
-                dd($data['roles']);
-                $data['permissions'] = Permission::pluck('name', 'id')->all();
-                return view('admin.roles.list', $data)->with('message', 'Role' . $role->name . ' created successfully!');
+                return redirect()->route('roles.index')->with('success', 'Role  Created successfully');
             } else {
                 return redirect()->back()->with('error', 'Something went wrong!');
             }
@@ -94,6 +93,20 @@ class RoleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Find the role by its ID
+        $role = Role::find($id);
+
+        if (!$role) {
+            return redirect()->route('roles.index')->with('error', 'Role not found');
+        }
+        // Delete the role
+
+        try {
+
+            $role->delete();
+            return redirect()->route('roles.index')->with('success', 'Role  deleted successfully');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 }
