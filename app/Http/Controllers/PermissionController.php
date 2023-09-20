@@ -18,7 +18,7 @@ class PermissionController extends Controller
         try {
             $data['permissions'] = Permission::orderBy('id', 'ASC')->paginate(7);
             return view('admin.permissions.list', $data);
-        } catch (\Throwable $e) {
+        } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
@@ -52,7 +52,7 @@ class PermissionController extends Controller
             // Create the permission
             $permissions = Permission::orderBy('id', 'ASC')->paginate(7);
             return view('admin.permissions.list')->with('permissions', $permissions);
-        } catch (\Throwable $e) {
+        } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }

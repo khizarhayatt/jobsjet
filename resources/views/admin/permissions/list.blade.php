@@ -53,6 +53,7 @@
                                             <th>#</th>
                                             <th>Title</th>
                                             <th>Created At</th>
+
                                             <th>Action</th>
                                         </tr>
                                         @foreach ($permissions as $key => $item)

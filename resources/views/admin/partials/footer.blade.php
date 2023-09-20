@@ -5,3 +5,13 @@
     <div class="footer-right">
     </div>
 </footer>
+<script>
+    $(document).ready(function() {
+        const $selectAllCheckbox = $('#inlineCheckboxAll');
+        const $checkboxes = $('.chkAll');
+
+        $selectAllCheckbox.on('click', function() {
+            $checkboxes.prop('checked', $selectAllCheckbox.prop('checked'));
+        });
+    });
+</script>
