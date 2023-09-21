@@ -7,7 +7,8 @@
                     @include('errors.alerts')
                     <div class="card">
                         <div class="card-header">
-                            <h4>Create Role:</h4>
+                            <h4>Roles List</h4>
+
                         </div>
                         <div class="card-body">
                             <form action="{{ route('roles.store') }}" method="post">
@@ -57,6 +58,14 @@
                     <div class="card">
                         <div class="card-header justify-content-between">
                             <h4>Roles List</h4>
+                            <form action="{{ route('roles.index') }}" class="card-header-form">
+                                <div class="input-group">
+                                    <input type="text" name="keyword" class="form-control" placeholder="Search">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-primary btn-icon"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                         <div class="card-body p-0">
                             <div class="table-responsive">

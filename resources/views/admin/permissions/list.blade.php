@@ -9,7 +9,8 @@
                     @include('errors.alerts')
                     <div class="card">
                         <div class="card-header">
-                            <h4>Create Permission</h4>
+                            <h4>Permissions Create</h4>
+
                         </div>
                         <div class="card-body">
 
@@ -44,6 +45,14 @@
                     <div class="card">
                         <div class="card-header justify-content-between">
                             <h4>Permissions</h4>
+                            <form action="{{ route('permissions.index') }}" class="card-header-form">
+                                <div class="input-group">
+                                    <input type="text" name="keyword" class="form-control" placeholder="Search">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-primary btn-icon"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                         <div class="card-body p-0">
                             <div class="table-responsive">

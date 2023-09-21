@@ -16,12 +16,23 @@ class PermissionController extends Controller
     public function index(Request $request)
     {
         try {
-            $data['permissions'] = Permission::orderBy('id', 'ASC')->paginate(7);
+            $keyword = $request->input('keyword');
+
+            // Query the permissions table based on the keyword
+            $query = Permission::orderBy('id', 'ASC');
+
+            if (!empty($keyword)) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            }
+
+            $data['permissions'] = $query->paginate(7);
+
             return view('admin.permissions.list', $data);
         } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -76,7 +87,7 @@ class PermissionController extends Controller
                 return view('admin.permissions.edit', $data);
             }
             return redirect()->route("permissions.index")->with('error', 'Permission  not found!');
-        } catch (\Throwable $e) {
+        } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }

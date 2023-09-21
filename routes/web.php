@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -44,7 +45,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/users', [HomeController::class, 'userlist'])->name('admin.users.list');
     Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
 
-   
+
 
     // Permissions
      // Show a listing of permissions
@@ -76,6 +77,22 @@ Route::middleware(['auth'])->group(function () {
 
     // Remove the specified Role from storage
     Route::delete('roles/{id}', [RoleController::class,'destroy'])->name('roles.destroy');
+
+    // users
+     // Show a listing of users
+     Route::get('users', [AdminController::class,'index'])->name('users.index');
+
+     // Store a newly created Role in storage
+     Route::post('users', [AdminController::class,'store'])->name('users.store');
+
+     // Show the form for editing the specified Role
+     Route::get('users/{id}/edit', [AdminController::class,'edit'])->name('users.edit');
+
+     // Update the specified Role in storage
+     Route::put('users/{id}', [AdminController::class,'update'])->name('users.update');
+
+     // Remove the specified Role from storage
+     Route::delete('users/{id}', [AdminController::class,'destroy'])->name('users.destroy');
 
 
 });

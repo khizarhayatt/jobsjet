@@ -13,11 +13,22 @@ class RoleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
+
+            $keyword = $request->input('keyword');
+
+            // Query the roles table based on the keyword
+
+            $query = Role::orderBy('id', 'ASC');
+
+            if (!empty($keyword)) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            }
+
             $data['permissions'] = Permission::pluck('name', 'id')->all();
-            $data['roles'] = Role::orderBy('id', 'ASC')->paginate(7);
+            $data['roles'] = $query->paginate(7);;
             return view('admin.roles.list', $data);
         } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
@@ -75,9 +86,19 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request, Role $role)
     {
-        //
+        try {
+
+            $data['role'] = Role::with('permissions')->find($request->id);
+            $data['permissions'] = Permission::pluck('name', 'id')->all();
+            if (!empty($data['role'])) {
+                return view('admin.roles.edit', $data);
+            }
+            return redirect()->route("roles.index")->with('error', 'Role  not found!');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
