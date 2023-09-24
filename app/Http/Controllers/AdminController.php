@@ -24,7 +24,9 @@ class AdminController extends Controller
             $query = User::orderBy('id', 'ASC')->where('role', User::ADMIN_ROLE)->with('roles', 'permissions');
 
             if (!empty($keyword)) {
-                $query->where('name', 'like', '%' . $keyword . '%');
+                $query->where('first_name', 'like', '%' . $keyword . '%')
+                    ->orWhere('last_name', 'like', '%' . $keyword . '%')
+                    ->orWhere('email', 'like', '%' . $keyword . '%');
             }
 
             $data['users'] = $query->paginate(7);
@@ -60,6 +62,8 @@ class AdminController extends Controller
             $user->profile_photo = $profilePhotoPath;
         }
         $user->assignRole($request->input('roles'));
+        $user->syncPermissions($request->input('permissions'));
+
         $user->save();
 
         if ($user and $user->id > 0) {
@@ -71,19 +75,17 @@ class AdminController extends Controller
     }
     public function edit(Request $request)
     {
+
         try {
-
-
             $data['user'] = User::find($request->id);
+
             if (!$data['user']) {
                 // Handle the case where the user with the given ID does not exist.
                 return redirect()->route('users.index')->with('error', 'User not found');
             }
+
             $data['roles'] = Role::pluck('name', 'id')->all();
             $data['permissions'] = Permission::pluck('name', 'id')->all();
-            $data['user']->with('roles', 'permissions');
-
-
             return view('admin.users.edit', $data);
         } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());

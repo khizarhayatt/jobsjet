@@ -8,17 +8,7 @@
             <li><a href="#" class="nav-link nav-link-lg fullscreen-btn">
                     <i data-feather="maximize"></i>
                 </a></li>
-            <li>
-                <form class="form-inline mr-auto">
-                    <div class="search-element">
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search"
-                            data-width="200">
-                        <button class="btn" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </form>
-            </li>
+
         </ul>
     </div>
     <ul class="navbar-nav navbar-right">
@@ -86,11 +76,14 @@
                         class="far
                                   fa-user"></i> Profile
                 </a>
-
-                <a href="auth-login.html" class="dropdown-item has-icon text-danger"> <i
-                        class="fas fa-sign-out-alt"></i>
+                <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                    class="dropdown-item has-icon cursor-pointer text-danger">
+                    <i class="fas fa-sign-out-alt"></i>
                     Logout
                 </a>
+                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </div>
         </li>
     </ul>

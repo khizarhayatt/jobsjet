@@ -16,6 +16,25 @@
             $checkboxes.prop('checked', $selectAllCheckbox.prop('checked'));
         });
 
+        // Permissions checkboxes and select-all
+        const $selectAllCheckboxPermissions = $('#inlineCheckboxAllPermissions');
+        const $checkboxesPermissions = $('.chkAllPermissions');
+
+        $selectAllCheckboxPermissions.on('click', function() {
+            $checkboxesPermissions.prop('checked', $selectAllCheckboxPermissions.prop('checked'));
+        });
+
+        // Roles checkboxes and select-all
+        const $selectAllCheckboxRoles = $('#inlineCheckboxAllRoles');
+        const $checkboxesRoles = $('.chkAllRoles');
+
+        $selectAllCheckboxRoles.on('click', function() {
+            $checkboxesRoles.prop('checked', $selectAllCheckboxRoles.prop('checked'));
+        });
+
+
+
+
         $("#imageInput").change(function() {
             readURL(this);
         });

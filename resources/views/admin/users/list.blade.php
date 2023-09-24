@@ -43,13 +43,41 @@
                                                 <td> {{ $user->email }}</td>
                                                 <td>
 
-                                                    <span class="badge badge-info my-1">Roles
-                                                        {{ $user->roles->count() }}
-                                                    </span>
+                                                    <a href="#" data-toggle-target="roles-wrapper-{{ $user->id }}"
+                                                        class="btn toggle-link text-light btn-sm rounded-pill btn-dark my-1 d-inline-block">
+                                                        <i class="fa-solid fa-eye"></i></i>
+                                                        Roles ({{ count($user->roles) }})
+                                                    </a>
 
-                                                    <span class="badge badge-light my-1">Permissions
-                                                        {{ $user->permissions->count() }}
-                                                    </span>
+                                                    <a href="#"
+                                                        data-toggle-target="permissions-wrapper-{{ $user->id }}"
+                                                        class="btn toggle-link text-dark btn-sm rounded-pill btn-light my-1 d-inline-block">
+                                                        <i class="fa-solid fa-eye"></i></i>
+                                                        Permissions ({{ count($user->permissions) }})
+                                                    </a>
+
+                                                    <div id="roles-wrapper-{{ $user->id }}"
+                                                        class="roles-wrapper d-none">
+
+                                                        @foreach ($user->roles as $role)
+                                                            <span
+                                                                class="badge badge-dark my-1 d-inline-block">{{ $role->name }}
+                                                            </span>
+                                                        @endforeach
+
+                                                    </div>
+                                                    <div id="permissions-wrapper-{{ $user->id }}"
+                                                        class="permissions-wrapper d-none">
+
+                                                        @foreach ($user->permissions as $permission)
+                                                            <span
+                                                                class="badge badge-light my-1 d-inline-block">{{ $permission->name }}
+                                                            </span>
+                                                        @endforeach
+
+                                                    </div>
+
+
 
                                                 </td>
                                                 <td> {{ isset($user->created_at) ? $user->created_at->format('F j, Y') : '-' }}
@@ -96,4 +124,5 @@
 
         </div>
     </section>
+    @include('admin.users.partials.rolestoggle')
 @endsection

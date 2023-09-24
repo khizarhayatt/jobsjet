@@ -84,15 +84,14 @@
                                                  <label class="form-check-label" for="inlineCheckboxAll">Selec All</label>
                                              </div>
                                              <hr class="m-0">
-                                             <div class="selectwrap mt-2">
+                                             <div class="selectwrap-roles mt-2">
 
                                                  @foreach ($roles as $id => $name)
                                                      <div class="form-check form-check-inline">
                                                          <input class="form-check-input chkAll" name="roles[]"
                                                              type="checkbox" id="inlineCheckbox-{{ $id }}"
-                                                             value="{{ $id }}
+                                                             value="{{ $id }}" {{-- @if ($user->roles->pluck('id')->contains($id)) checked @endif --}}
                                                              {{ in_array($id, $user->roles->pluck('id')->toArray()) ? 'checked' : '' }}>
-                                                             ">
                                                          <label class="form-check-label"
                                                              for="inlineCheckbox-{{ $id }}">{{ $name }}</label>
                                                      </div>
@@ -108,21 +107,24 @@
                                                          class="far fa-plus px-2"></i>Create
                                                      Permissions</a>
                                              </div>
-                                             <label class="d-block">Select Roles</label>
+                                             <label class="d-block">Select Permissions</label>
 
                                              <div class="form-check form-check-inline w-100">
-                                                 <input class="form-check-input" type="checkbox" id="inlineCheckboxAll"
-                                                     value="option1">
-                                                 <label class="form-check-label" for="inlineCheckboxAll">Selec All</label>
+                                                 <input class="form-check-input" type="checkbox"
+                                                     id="inlineCheckboxAllPermissions" value="option1">
+                                                 <label class="form-check-label" for="inlineCheckboxAllPermissions">Selec
+                                                     All</label>
                                              </div>
                                              <hr class="m-0">
-                                             <div class="selectwrap mt-2">
+                                             <div class="selectwrap-permissions mt-2">
 
                                                  @foreach ($permissions as $id => $name)
                                                      <div class="form-check form-check-inline">
-                                                         <input class="form-check-input chkAll" name="permissions[]"
-                                                             type="checkbox" id="inlineCheckbox-{{ $id }}"
-                                                             value="{{ $id }}">
+                                                         <input class="form-check-input chkAllPermissions"
+                                                             name="permissions[]" type="checkbox"
+                                                             id="inlineCheckbox-{{ $id }}"
+                                                             value="{{ $id }}"
+                                                             {{ in_array($id, $user->permissions->pluck('id')->toArray()) ? 'checked' : '' }}>
                                                          <label class="form-check-label"
                                                              for="inlineCheckbox-{{ $id }}">{{ $name }}</label>
                                                      </div>
