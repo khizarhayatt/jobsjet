@@ -86,7 +86,7 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request, Role $role)
+    public function edit(Request $request)
     {
         try {
 

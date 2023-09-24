@@ -7,8 +7,10 @@
                     @include('errors.alerts')
                     <div class="card">
                         <div class="card-header justify-content-between">
-                            <h4>Roles List</h4>
-                            <form action="{{ route('roles.index') }}" class="card-header-form">
+                            <h4>Users List</h4>
+
+                            <form action="" class="card-header-form">
+
                                 <div class="input-group">
                                     <input type="text" name="keyword" class="form-control" placeholder="Search">
                                     <div class="input-group-btn">
@@ -16,6 +18,11 @@
                                     </div>
                                 </div>
                             </form>
+                            <div class="card-header-action ml-2">
+                                <a href="{{ route('users.create') }}" class="btn btn-primary"> <i
+                                        class="far fa-plus px-1"></i>Create
+                                    User</a>
+                            </div>
                         </div>
                         <div class="card-body p-0">
                             <div class="table-responsive">
@@ -23,36 +30,40 @@
                                     <tbody>
                                         <tr>
                                             <th>#</th>
-                                            <th>Title</th>
-                                            <th>Permissios</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Roles & Direct Permissions</th>
                                             <th>Created At</th>
                                             <th>Action</th>
                                         </tr>
-                                        @foreach ($roles as $key => $item)
+                                        @foreach ($users as $key => $user)
                                             <tr>
-                                                <td>{{ $key + 1 }}</td>
-                                                <td class="w-25">{{ $item->name }}</td>
-                                                <td style="width:40%">
-                                                    <span class="badge badge-info my-1">Total
-                                                        ({{ count($item->permissions) }})
+                                                <td> {{ $key + 1 }}</td>
+                                                <td>{{ $user->first_name . ' ' . $user->last_name }}</td>
+                                                <td> {{ $user->email }}</td>
+                                                <td>
+
+                                                    <span class="badge badge-info my-1">Roles
+                                                        {{ $user->roles->count() }}
                                                     </span>
-                                                    @foreach ($item->permissions as $permission)
-                                                        <span class="badge badge-light my-1">{{ $permission->name }}
-                                                        </span>
-                                                    @endforeach
+
+                                                    <span class="badge badge-light my-1">Permissions
+                                                        {{ $user->permissions->count() }}
+                                                    </span>
 
                                                 </td>
-                                                <td> {{ $item->created_at->format('F j, Y') }} </td>
+                                                <td> {{ isset($user->created_at) ? $user->created_at->format('F j, Y') : '-' }}
+                                                </td>
 
                                                 <td class="">
                                                     <div class="buttons">
 
-                                                        <a href="{{ route('roles.edit', $item->id) }}"
+                                                        <a href="{{ route('users.edit', $user->id) }}"
                                                             class="btn btn-sm btn-icon btn-primary"><i
                                                                 class="far fa-edit"></i></a>
 
                                                         <form method="post" class="d-inline-block"
-                                                            action="{{ route('roles.destroy', $item->id) }}">
+                                                            action="{{ route('users.destroy', $user->id) }}">
                                                             @method('delete')
                                                             @csrf
                                                             <button type="submit"
@@ -63,6 +74,7 @@
                                                 </td>
                                             </tr>
                                         @endforeach
+
                                     </tbody>
                                 </table>
                             </div>
@@ -70,8 +82,8 @@
                         <div class="card-footer text-right">
                             <nav class="d-inline-block">
 
-                                @if ($roles->hasPages())
-                                    {{ $roles->links() }}
+                                @if ($users->hasPages())
+                                    {{ $users->links() }}
                                 @endif
 
                             </nav>

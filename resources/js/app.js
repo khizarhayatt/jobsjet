@@ -13,5 +13,4 @@ import '../assets/bundles/jquery-pwstrength/jquery.pwstrength.min';
 import '../assets/bundles/jquery-selectric/jquery.selectric.min';
 import '../assets/js/page/auth-register';
 import '../assets/js/scripts';
-import '../assets/js/custom'; 
-import '../assets/js/bootstrap-switch.min';
+import '../assets/js/custom';  

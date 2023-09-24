@@ -22,10 +22,8 @@
                     <i class="fa-solid fa-user"></i><span>Users </span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{ route('users.index') }}">Users List</a></li>
-                    <li><a class="nav-link" href="#">Create User</a></li>
-                    <li><a class="nav-link" href="{{ route('roles.index') }}"> Roles</a></li>
-                    <li><a class="nav-link" href="{{ route('permissions.index') }}"> Permissions</a></li>
+                    <li><a class="nav-link" href="{{ route('users.index') }}">All Users </a></li>
+                    <li><a class="nav-link" href="{{ route('roles.index') }}"> Roles & Permissions</a></li>
                     <li><a class="nav-link" href="#">Activity & History</a></li>
                 </ul>
             </li>

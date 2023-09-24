@@ -6,9 +6,11 @@
                 <div class="  col-md-4 col-sm-12 col-lg-4">
                     @include('errors.alerts')
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header justify-content-between">
                             <h4>Roles List</h4>
-
+                            <a href="{{ route('permissions.index') }}" class="btn btn-sm btn-primary rounded-pill"><i
+                                    class="far fa-plus px-2"></i>Create
+                                Permission</a>
                         </div>
                         <div class="card-body">
                             <form action="{{ route('roles.store') }}" method="post">
@@ -83,18 +85,27 @@
                                                 <td>{{ $key + 1 }}</td>
                                                 <td class="w-25">{{ $item->name }}</td>
                                                 <td style="width:40%">
-                                                    <span class="badge badge-info my-1">Total
+                                                    <a href="#" data-toggle-target="roles-wrapper-{{ $item->id }}"
+                                                        class="btn toggle-link text-dark btn-sm rounded-pill btn-light my-1 d-inline-block">
+                                                        <i class="fa-solid fa-eye"></i></i>
                                                         ({{ count($item->permissions) }})
-                                                    </span>
-                                                    @foreach ($item->permissions as $permission)
-                                                        <span class="badge badge-light my-1">{{ $permission->name }}
-                                                        </span>
-                                                    @endforeach
+                                                    </a>
+                                                    <div id="roles-wrapper-{{ $item->id }}"
+                                                        class="roles-wrapper d-none">
+
+                                                        @foreach ($item->permissions as $permission)
+                                                            <span
+                                                                class="badge badge-light my-1 d-inline-block">{{ $permission->name }}
+                                                            </span>
+                                                        @endforeach
+
+                                                    </div>
 
                                                 </td>
                                                 <td> {{ $item->created_at->format('F j, Y') }} </td>
 
                                                 <td class="">
+
                                                     <div class="buttons">
 
                                                         <a href="{{ route('roles.edit', $item->id) }}"
@@ -113,6 +124,7 @@
                                                 </td>
                                             </tr>
                                         @endforeach
+
                                     </tbody>
                                 </table>
                             </div>
@@ -130,8 +142,7 @@
                 </div>
             </div>
         </div>
-
-
         </div>
     </section>
+    @include('admin.roles.partials.permissionstoggle')
 @endsection

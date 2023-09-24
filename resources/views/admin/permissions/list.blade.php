@@ -8,9 +8,11 @@
                 <div class="  col-sm-12 col-md-4 col-lg-4">
                     @include('errors.alerts')
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header justify-content-between">
                             <h4>Permissions Create</h4>
-
+                            <a href="{{ route('roles.index') }}" class="btn btn-sm btn-primary rounded-pill"><i
+                                    class="far fa-plus px-2"></i>Create
+                                Roles</a>
                         </div>
                         <div class="card-body">
 

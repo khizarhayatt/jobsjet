@@ -15,8 +15,9 @@ use Illuminate\Support\Facades\Route;
 | Routes
 |--------------------------------------------------------------------------
 */
+
 Auth::routes();
-Route::get('/', [LoginController::class, 'login'])->name('admin.login');
+Route::get('/', [LoginController::class, 'login'])->name('login');
 
 //admin routes
 Route::middleware(['guest'])->group(function () {
@@ -48,53 +49,54 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Permissions
-     // Show a listing of permissions
-    Route::get('permissions', [PermissionController::class,'index'])->name('permissions.index');
+    // Show a listing of permissions
+    Route::get('permissions', [PermissionController::class, 'index'])->name('permissions.index');
 
     // Store a newly created permission in storage
-    Route::post('permissions', [PermissionController::class,'store'])->name('permissions.store');
+    Route::post('permissions', [PermissionController::class, 'store'])->name('permissions.store');
 
     // Show the form for editing the specified permission
-    Route::get('permissions/{id}/edit', [PermissionController::class,'edit'])->name('permissions.edit');
+    Route::get('permissions/{id}/edit', [PermissionController::class, 'edit'])->name('permissions.edit');
 
     // Update the specified permission in storage
-    Route::put('permissions/{id}', [PermissionController::class,'update'])->name('permissions.update');
+    Route::put('permissions/{id}', [PermissionController::class, 'update'])->name('permissions.update');
 
     // Remove the specified permission from storage
-    Route::delete('permissions/{id}', [PermissionController::class,'destroy'])->name('permissions.destroy');
+    Route::delete('permissions/{id}', [PermissionController::class, 'destroy'])->name('permissions.destroy');
     // roles
-     // Show a listing of roles
-    Route::get('roles', [RoleController::class,'index'])->name('roles.index');
+    // Show a listing of roles
+    Route::get('roles', [RoleController::class, 'index'])->name('roles.index');
 
     // Store a newly created Role in storage
-    Route::post('roles', [RoleController::class,'store'])->name('roles.store');
+    Route::post('roles', [RoleController::class, 'store'])->name('roles.store');
 
     // Show the form for editing the specified Role
-    Route::get('roles/{id}/edit', [RoleController::class,'edit'])->name('roles.edit');
+    Route::get('roles/{id}/edit', [RoleController::class, 'edit'])->name('roles.edit');
 
     // Update the specified Role in storage
-    Route::put('roles/{id}', [RoleController::class,'update'])->name('roles.update');
+    Route::put('roles/{id}', [RoleController::class, 'update'])->name('roles.update');
 
     // Remove the specified Role from storage
-    Route::delete('roles/{id}', [RoleController::class,'destroy'])->name('roles.destroy');
+    Route::delete('roles/{id}', [RoleController::class, 'destroy'])->name('roles.destroy');
 
     // users
-     // Show a listing of users
-     Route::get('users', [AdminController::class,'index'])->name('users.index');
+    // Show a listing of users
+    Route::get('users', [AdminController::class, 'index'])->name('users.index');
 
-     // Store a newly created Role in storage
-     Route::post('users', [AdminController::class,'store'])->name('users.store');
+    // Show a listing of users
+    Route::get('users/create', [AdminController::class, 'create'])->name('users.create');
 
-     // Show the form for editing the specified Role
-     Route::get('users/{id}/edit', [AdminController::class,'edit'])->name('users.edit');
+    // Store a newly created Role in storage
+    Route::post('users', [AdminController::class, 'store'])->name('users.store');
 
-     // Update the specified Role in storage
-     Route::put('users/{id}', [AdminController::class,'update'])->name('users.update');
+    // Show the form for editing the specified Role
+    Route::get('users/{id}/edit', [AdminController::class, 'edit'])->name('users.edit');
 
-     // Remove the specified Role from storage
-     Route::delete('users/{id}', [AdminController::class,'destroy'])->name('users.destroy');
+    // Update the specified Role in storage
+    Route::put('users/{id}', [AdminController::class, 'update'])->name('users.update');
 
-
+    // Remove the specified Role from storage
+    Route::delete('users/{id}', [AdminController::class, 'destroy'])->name('users.destroy');
 });
 
 
