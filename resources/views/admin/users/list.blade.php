@@ -41,7 +41,7 @@
                                                 <td> {{ $key + 1 }}</td>
                                                 <td>{{ $user->first_name . ' ' . $user->last_name }}</td>
                                                 <td> {{ $user->email }}</td>
-                                                <td>
+                                                <td class="w-50">
 
                                                     <a href="#" data-toggle-target="roles-wrapper-{{ $user->id }}"
                                                         class="btn toggle-link text-light btn-sm rounded-pill btn-dark my-1 d-inline-block">

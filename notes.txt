@@ -1,0 +1,41 @@
+
+company
+-name
+-email
+-phone
+-website
+-cover img
+-logo
+-about
+-industry
+-founded in
+-company size
+-Comapany location
+--Country/State
+--City
+--Address
+-socail 
+fb
+twitter
+linkedin
+instagram
+
+-----------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
