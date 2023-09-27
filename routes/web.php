@@ -1,16 +1,19 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BenefitController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\IndustryTypeController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\ProfessionController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -46,121 +49,86 @@ Route::middleware(['guest'])->group(function () {
 
 
 Route::middleware(['auth'])->group(function () {
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/users', [HomeController::class, 'userlist'])->name('admin.users.list');
     Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
 
-
-
     // Permissions
-    // Show a listing of permissions
     Route::get('permissions', [PermissionController::class, 'index'])->name('permissions.index');
-
-    // Store a newly created permission in storage
     Route::post('permissions', [PermissionController::class, 'store'])->name('permissions.store');
-
-    // Show the form for editing the specified permission
     Route::get('permissions/{id}/edit', [PermissionController::class, 'edit'])->name('permissions.edit');
-
-    // Update the specified permission in storage
     Route::put('permissions/{id}', [PermissionController::class, 'update'])->name('permissions.update');
-
-    // Remove the specified permission from storage
     Route::delete('permissions/{id}', [PermissionController::class, 'destroy'])->name('permissions.destroy');
+
     // roles
-    // Show a listing of roles
     Route::get('roles', [RoleController::class, 'index'])->name('roles.index');
-
-    // Store a newly created Role in storage
     Route::post('roles', [RoleController::class, 'store'])->name('roles.store');
-
-    // Show the form for editing the specified Role
     Route::get('roles/{id}/edit', [RoleController::class, 'edit'])->name('roles.edit');
-
-    // Update the specified Role in storage
     Route::put('roles/{id}', [RoleController::class, 'update'])->name('roles.update');
-
-    // Remove the specified Role from storage
     Route::delete('roles/{id}', [RoleController::class, 'destroy'])->name('roles.destroy');
 
     // users
-    // Show a listing of users
     Route::get('users', [AdminController::class, 'index'])->name('users.index');
-
-    // Show a listing of users
     Route::get('users/create', [AdminController::class, 'create'])->name('users.create');
-
-    // Store a newly created Role in storage
     Route::post('users', [AdminController::class, 'store'])->name('users.store');
-
-    // Show the form for editing the specified Role
     Route::get('users/{id}/edit', [AdminController::class, 'edit'])->name('users.edit');
-
-    // Update the specified Role in storage
     Route::put('users/{id}', [AdminController::class, 'update'])->name('users.update');
-
-    // Remove the specified Role from storage
     Route::delete('users/{id}', [AdminController::class, 'destroy'])->name('users.destroy');
 
     // IndustryTypes
-    // Show a listing of industry
     Route::get('industry', [IndustryTypeController::class, 'index'])->name('industry.index');
-
-    // Store a newly created IndustryType in storage
     Route::post('industry', [IndustryTypeController::class, 'store'])->name('industry.store');
-
-    // Show the form for editing the specified IndustryType
     Route::get('industry/{id}/edit', [IndustryTypeController::class, 'edit'])->name('industry.edit');
-
-    // Update the specified IndustryType in storage
     Route::put('industry/{id}', [IndustryTypeController::class, 'update'])->name('industry.update');
-
     Route::delete('industry/{id}', [IndustryTypeController::class, 'destroy'])->name('industry.destroy');
-   
+
     // ProfessionTypes
-    // Show a listing of Profession
     Route::get('profession', [ProfessionController::class, 'index'])->name('profession.index');
-
-    // Store a newly created ProfessionTypProfession in storage
     Route::post('profession', [ProfessionController::class, 'store'])->name('profession.store');
-
-    // Show the form for editing the specified ProfessionTypProfession
     Route::get('profession/{id}/edit', [ProfessionController::class, 'edit'])->name('profession.edit');
-
-    // Update the specified ProfessionTypProfession in storage
     Route::put('profession/{id}', [ProfessionController::class, 'update'])->name('profession.update');
-
     Route::delete('profession/{id}', [ProfessionController::class, 'destroy'])->name('profession.destroy');
-   
+
     // Skills
-    // Show a listing of Profession
+
     Route::get('skill', [SkillController::class, 'index'])->name('skill.index');
-
-    // Store a newly created ProfessionTypProfession in storage
     Route::post('skill', [SkillController::class, 'store'])->name('skill.store');
-
-    // Show the form for editing the specified ProfessionTypProfession
     Route::get('skill/{id}/edit', [SkillController::class, 'edit'])->name('skill.edit');
-
-    // Update the specified ProfessionTypProfession in storage
     Route::put('skill/{id}', [SkillController::class, 'update'])->name('skill.update');
-
     Route::delete('skill/{id}', [SkillController::class, 'destroy'])->name('skill.destroy');
 
-    // Skills
-    // Show a listing of Profession
+    // Oragnization
+
     Route::get('organization', [OrganizationController::class, 'index'])->name('organization.index');
-
-    // Store a newly created ProfessionTypProfession in storage
     Route::post('organization', [OrganizationController::class, 'store'])->name('organization.store');
-
-    // Show the form for editing the specified ProfessionTypProfession
     Route::get('organization/{id}/edit', [OrganizationController::class, 'edit'])->name('organization.edit');
-
-    // Update the specified ProfessionTypProfession in storage
     Route::put('organization/{id}', [OrganizationController::class, 'update'])->name('organization.update');
-
     Route::delete('organization/{id}', [OrganizationController::class, 'destroy'])->name('organization.destroy');
+
+    // Tag
+
+    Route::get('tag', [TagController::class, 'index'])->name('tag.index');
+    Route::post('tag', [TagController::class, 'store'])->name('tag.store');
+    Route::get('tag/{id}/edit', [TagController::class, 'edit'])->name('tag.edit');
+    Route::put('tag/{id}', [TagController::class, 'update'])->name('tag.update');
+    Route::delete('tag/{id}', [TagController::class, 'destroy'])->name('tag.destroy');
+
+    // Benefit
+
+    Route::get('benefit', [BenefitController::class, 'index'])->name('benefit.index');
+    Route::post('benefit', [BenefitController::class, 'store'])->name('benefit.store');
+    Route::get('benefit/{id}/edit', [BenefitController::class, 'edit'])->name('benefit.edit');
+    Route::put('benefit/{id}', [BenefitController::class, 'update'])->name('benefit.update');
+    Route::delete('benefit/{id}', [BenefitController::class, 'destroy'])->name('benefit.destroy');
+
+    // Language
+
+    Route::get('language', [LanguageController::class, 'index'])->name('language.index');
+    Route::post('language', [LanguageController::class, 'store'])->name('language.store');
+    Route::get('language/{id}/edit', [LanguageController::class, 'edit'])->name('language.edit');
+    Route::put('language/{id}', [LanguageController::class, 'update'])->name('language.update');
+    Route::delete('language/{id}', [LanguageController::class, 'destroy'])->name('language.destroy');
 
 
 });

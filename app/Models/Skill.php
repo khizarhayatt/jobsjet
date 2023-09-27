@@ -8,5 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Skill extends Model
 {
     use HasFactory;
-    protected $guarded =[]; 
+    protected $guarded =[];
+    public function jobs()
+{
+    return $this->hasMany(Job::class);
+}
 }

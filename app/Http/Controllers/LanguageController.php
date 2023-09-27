@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 use Exception;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Profession;
+use App\Models\Language;
 use Illuminate\Http\Request;
 
-class ProfessionController extends Controller
+class LanguageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,16 +18,16 @@ class ProfessionController extends Controller
             $keyword = $request->input('keyword');
 
             // Query the industry table based on the keyword
-            $query = Profession::orderBy('id', 'ASC');
+            $query = Language::orderBy('id', 'ASC');
 
             if (!empty($keyword)) {
-                $query->where('name', 'like', '%' . $keyword . '%')
-                ->orwhere('description', 'like', '%' . $keyword . '%');
+                $query->where('name', 'like', '%' . $keyword . '%');
+
             }
 
-            $data['professions'] = $query->paginate(7);
+            $data['languages'] = $query->paginate(7);
 
-            return view('admin.professions.list', $data);
+            return view('admin.languages.list', $data);
 
            }
           catch (Exception $e) {  return redirect()->back()->with('error', $e->getMessage()); }
@@ -56,11 +56,11 @@ class ProfessionController extends Controller
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
             }
-            $industry = Profession::create([
+            $industry = Language::create([
                 'name' => $request->name,
-                'description' => $request->description,
+
             ]);
-            return redirect()->route('profession.index')->with('success', 'Profession has been created');
+            return redirect()->route('language.index')->with('success', 'Language has been created');
 
          }
         catch (Exception $e) {  return redirect()->back()->with('error', $e->getMessage()); }
@@ -77,16 +77,16 @@ class ProfessionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request, Profession $industry)
+    public function edit(Request $request, Language $industry)
     {
 
         try {
 
-            $data['profession'] = Profession::where('id', $request->id)->first();
-            if (!empty($data['profession'])) {
-                return view('admin.professions.edit', $data);
+            $data['language'] = Language::where('id', $request->id)->first();
+            if (!empty($data['language'])) {
+                return view('admin.languages.edit', $data);
             }
-            return redirect()->route("profession.index")->with('error', 'Profession  not found!');
+            return redirect()->route("language.index")->with('error', 'Language  not found!');
         } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -95,10 +95,10 @@ class ProfessionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Profession $industry)
+    public function update(Request $request, Language $industry)
     {
 
-        $single_industry = Profession::where('id', $request->id)->first();
+        $single_industry = Language::where('id', $request->id)->first();
 
         if (!empty($single_industry)) {
             $rules = [
@@ -113,13 +113,13 @@ class ProfessionController extends Controller
             try {
                 $update =  $single_industry->update([
                     'name' => $request->name,
-                    'description' => $request->description,
+
                 ]);
 
                 if ($update > 0) {
-                    return redirect()->route("profession.index")->with('success', 'Profession has been update');
+                    return redirect()->route("language.index")->with('success', 'Language has been update');
                 }
-                return redirect()->back()->with('error', 'failed to update this Profession');
+                return redirect()->back()->with('error', 'failed to update this Language');
             } catch (Exception $e) {
                 return redirect()->back()->with('error', $e->getMessage());
             }
@@ -132,17 +132,17 @@ class ProfessionController extends Controller
     public function destroy(string $id)
     {
         // Find the industry by its ID
-        $industry = Profession::find($id);
+        $industry = Language::find($id);
 
         if (!$industry) {
-            return redirect()->route('profession.index')->with('error', 'Profession not found');
+            return redirect()->route('language.index')->with('error', 'Language not found');
         }
         // Delete the $industry
 
         try {
 
             $industry->delete();
-            return redirect()->route('profession.index')->with('success', 'Profession  deleted successfully');
+            return redirect()->route('language.index')->with('success', 'Language  deleted successfully');
         } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

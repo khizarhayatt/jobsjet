@@ -3,7 +3,7 @@
         <div class="sidebar-brand">
             <a href="index.html">
                 <img alt="image" src="assets/img/logo.png" class="header-logo">
-                <span class="logo-name">Otika</span>
+                <span class="logo-name">JobsJet</span>
             </a>
         </div>
         <ul class="sidebar-menu">
@@ -78,7 +78,7 @@
                         </li>
 
                         <li class=" hover-icon">
-                            <a href="#" class="nav-link ">
+                            <a href="{{ route('tag.index') }}" class="nav-link ">
                                 <i class="nav-icon fas fa-tags"></i>
                                 Tags
                             </a>
@@ -86,7 +86,7 @@
                         </li>
 
                         <li class=" hover-icon">
-                            <a href="#" class="nav-link ">
+                            <a href="{{ route('benefit.index') }}" class="nav-link ">
                                 <i class="nav-icon fas fa-bullseye"></i>
                                 Benefits
                             </a>
@@ -94,7 +94,7 @@
                         </li>
 
                         <li class=" hover-icon">
-                            <a href="#" class="nav-link ">
+                            <a href="{{ route('language.index') }}" class="nav-link ">
                                 <i class="nav-icon fas fa-language"></i>
                                 Language
                             </a>

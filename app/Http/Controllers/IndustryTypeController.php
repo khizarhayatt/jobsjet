@@ -13,7 +13,7 @@ class IndustryTypeController extends Controller
      */
     public function index(Request $request)
     {
-         
+
            try {
             $keyword = $request->input('keyword');
 
@@ -28,8 +28,8 @@ class IndustryTypeController extends Controller
             $data['industryTypes'] = $query->paginate(7);
 
             return view('admin.industry_types.list', $data);
-              
-           } 
+
+           }
           catch (Exception $e) {  return redirect()->back()->with('error', $e->getMessage()); }
     }
 
@@ -38,19 +38,19 @@ class IndustryTypeController extends Controller
      */
     public function create()
     {
-         
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    { 
+    {
         try {
 
             $rules = [
-                'name' => 'required|min:5',
-                
+                'name' => 'required',
+
             ];
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
@@ -62,7 +62,7 @@ class IndustryTypeController extends Controller
             ]);
             return redirect()->route('industry.index')->with('success', 'Industry has been created');
 
-         } 
+         }
         catch (Exception $e) {  return redirect()->back()->with('error', $e->getMessage()); }
     }
 
@@ -71,7 +71,7 @@ class IndustryTypeController extends Controller
      */
     public function show(string $id)
     {
-       
+
     }
 
     /**
@@ -79,7 +79,7 @@ class IndustryTypeController extends Controller
      */
     public function edit(Request $request, IndustryType $industry)
     {
-         
+
         try {
 
             $data['industryType'] = IndustryType::where('id', $request->id)->first();
@@ -103,7 +103,7 @@ class IndustryTypeController extends Controller
         if (!empty($single_industry)) {
             $rules = [
                 'name' => 'required',
-               
+
             ];
             $validator = Validator::make($request->all(), $rules);
 

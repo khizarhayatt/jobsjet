@@ -9,4 +9,8 @@ class Profession extends Model
 {
     use HasFactory;
     protected $guarded =[];
+
+    public function job(){
+        return $this->hasMany(Job::class);
+    }
 }
