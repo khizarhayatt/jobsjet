@@ -38,12 +38,14 @@
                     <a href="#" class=" nav-link has-dropdown">
                         <i class="fa-solid fa-briefcase"></i><span>Jobs </span>
                     </a>
+
                     <ul class="dropdown-menu">
                         <li><a class="nav-link" href="#">All Jobs</a></li>
                         <li><a class="nav-link" href="#">Job Categories</a></li>
                         <li><a class="nav-link" href="#">Job Roles</a></li>
 
                     </ul>
+
                 </li>
                 <li class="dropdown">
                     <a href="#" class="menu-toggle nav-link has-dropdown">
@@ -52,7 +54,7 @@
 
                     <ul class="dropdown-menu">
                         <li class=" hover-icon">
-                            <a href="#" class="nav-link ">
+                            <a href="{{ route('industry.index') }}" class="nav-link ">
                                 <i class="nav-icon fas fa-industry"></i>
                                 Industry Type
                             </a>
@@ -60,7 +62,7 @@
                         </li>
 
                         <li class=" hover-icon">
-                            <a href="#" class="nav-link ">
+                            <a href="{{ route('profession.index') }}" class="nav-link ">
                                 <i class="nav-icon fas fa-id-card"></i>
                                 Professions
                             </a>
@@ -68,7 +70,7 @@
                         </li>
 
                         <li class=" hover-icon">
-                            <a href="#" class="nav-link ">
+                            <a href="{{ route('skill.index') }}" class="nav-link ">
                                 <i class="nav-icon fas fa-cog"></i>
                                 Skills
                             </a>

@@ -4,6 +4,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\IndustryTypeController;
+use App\Http\Controllers\ProfessionController;
+use App\Http\Controllers\SkillController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RoleController;
@@ -97,6 +100,53 @@ Route::middleware(['auth'])->group(function () {
 
     // Remove the specified Role from storage
     Route::delete('users/{id}', [AdminController::class, 'destroy'])->name('users.destroy');
+
+    // IndustryTypes
+    // Show a listing of industry
+    Route::get('industry', [IndustryTypeController::class, 'index'])->name('industry.index');
+
+    // Store a newly created IndustryType in storage
+    Route::post('industry', [IndustryTypeController::class, 'store'])->name('industry.store');
+
+    // Show the form for editing the specified IndustryType
+    Route::get('industry/{id}/edit', [IndustryTypeController::class, 'edit'])->name('industry.edit');
+
+    // Update the specified IndustryType in storage
+    Route::put('industry/{id}', [IndustryTypeController::class, 'update'])->name('industry.update');
+
+    Route::delete('industry/{id}', [IndustryTypeController::class, 'destroy'])->name('industry.destroy');
+   
+    // ProfessionTypes
+    // Show a listing of Profession
+    Route::get('profession', [ProfessionController::class, 'index'])->name('profession.index');
+
+    // Store a newly created ProfessionTypProfession in storage
+    Route::post('profession', [ProfessionController::class, 'store'])->name('profession.store');
+
+    // Show the form for editing the specified ProfessionTypProfession
+    Route::get('profession/{id}/edit', [ProfessionController::class, 'edit'])->name('profession.edit');
+
+    // Update the specified ProfessionTypProfession in storage
+    Route::put('profession/{id}', [ProfessionController::class, 'update'])->name('profession.update');
+
+    Route::delete('profession/{id}', [ProfessionController::class, 'destroy'])->name('profession.destroy');
+   
+    // Skills
+    // Show a listing of Profession
+    Route::get('skill', [SkillController::class, 'index'])->name('skill.index');
+
+    // Store a newly created ProfessionTypProfession in storage
+    Route::post('skill', [SkillController::class, 'store'])->name('skill.store');
+
+    // Show the form for editing the specified ProfessionTypProfession
+    Route::get('skill/{id}/edit', [SkillController::class, 'edit'])->name('skill.edit');
+
+    // Update the specified ProfessionTypProfession in storage
+    Route::put('skill/{id}', [SkillController::class, 'update'])->name('skill.update');
+
+    Route::delete('skill/{id}', [SkillController::class, 'destroy'])->name('skill.destroy');
+
+
 });
 
 
