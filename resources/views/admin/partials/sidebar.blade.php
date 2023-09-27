@@ -101,7 +101,7 @@
 
                         </li>
                         <li class=" hover-icon">
-                            <a href="#" class="nav-link ">
+                            <a href="{{ route('organization.index') }}"" class="nav-link ">
                                 <i class="nav-icon fas fa-industry"></i>
                                 Organization Type
                             </a>

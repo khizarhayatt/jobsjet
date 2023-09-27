@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\IndustryTypeController;
+use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\ProfessionController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\PermissionController;
@@ -145,6 +146,21 @@ Route::middleware(['auth'])->group(function () {
     Route::put('skill/{id}', [SkillController::class, 'update'])->name('skill.update');
 
     Route::delete('skill/{id}', [SkillController::class, 'destroy'])->name('skill.destroy');
+
+    // Skills
+    // Show a listing of Profession
+    Route::get('organization', [OrganizationController::class, 'index'])->name('organization.index');
+
+    // Store a newly created ProfessionTypProfession in storage
+    Route::post('organization', [OrganizationController::class, 'store'])->name('organization.store');
+
+    // Show the form for editing the specified ProfessionTypProfession
+    Route::get('organization/{id}/edit', [OrganizationController::class, 'edit'])->name('organization.edit');
+
+    // Update the specified ProfessionTypProfession in storage
+    Route::put('organization/{id}', [OrganizationController::class, 'update'])->name('organization.update');
+
+    Route::delete('organization/{id}', [OrganizationController::class, 'destroy'])->name('organization.destroy');
 
 
 });

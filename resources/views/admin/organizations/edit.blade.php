@@ -9,23 +9,23 @@
                     @include('errors.alerts')
                     <div class="card">
                         <div class="card-header">
-                            <h4>Update Industry</h4>
+                            <h4>Update Organizaion</h4>
                         </div>
                         <div class="card-body">
 
-                            <form action="{{ route('industry.update', $industryType->id) }}" method="POST">
+                            <form action="{{ route('organization.update', $organization->id) }}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-row">
                                     <div class="  col-md-12">
                                         <div class="form-group">
-                                            <label for="title">Industry Title</label>
+                                            <label for="title">Organization Title</label>
                                             <input type="text" class="form-control" id="title" name="name"
-                                                placeholder="Enter Industry Title" value="{{ $industryType->name }}">
+                                                placeholder="Enter Organization Title" value="{{ $organization->name }}">
                                         </div>
                                         <div class="form-group">
-                                            <label for="description">Industry Description</label>
-                                            <textarea name="description" class="form-control" id="" cols="50" rows="50">{{ $industryType->description }}</textarea>
+                                            <label for="description">Organization Description</label>
+                                            <textarea name="description" class="form-control" id="" cols="50" rows="50">{{ $organization->description }}</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-12">
